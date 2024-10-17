@@ -3,7 +3,5 @@ services:
   webapp:
     build: .
     ports:
-      - "8080:8080"  # Maps container port 8080 to host port 8080
-    restart: always  # Automatically restart the container if it stops
-    environment:
-      SPRING_PROFILES_ACTIVE: prod  # Optional: Activate specific Spring profile if you have multiple profiles
+      - "8080:8080"
+    restart: always

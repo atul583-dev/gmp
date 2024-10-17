@@ -1,10 +1,10 @@
-# Use an official Maven image to build the application with Java 17
-FROM maven:3.8.6-openjdk-17 AS build
+# Use the latest Maven image with OpenJDK 17
+FROM maven:3.8.8-eclipse-temurin-17 AS build
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the pom.xml file and any other necessary Maven files to the container
+# Copy the pom.xml file and other Maven files to the container
 COPY pom.xml ./
 
 # Download all dependencies
@@ -17,7 +17,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # Use an official OpenJDK runtime image to run the application
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk-jammy
 
 # Set the working directory inside the runtime container
 WORKDIR /app

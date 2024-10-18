@@ -18,6 +18,8 @@ public class GMPDataFetcher {
     public List<IPO> fetchGMPData() {
         List<IPO> ipoList = new ArrayList<>();
         try {
+            // Example for ignoring SSL certificate validation (not recommended for production)
+            System.setProperty("javax.net.ssl.trustStoreType", "Windows-ROOT");
             // Connect to the Chittorgarh GMP page
             Document document = Jsoup.connect(GMP_URL)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")

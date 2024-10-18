@@ -59,9 +59,13 @@ public class GMPDataFetcher {
 
                     ipoList.add(new IPO(ipo, price, gmp, estListing, ipoSize, lot, open, close, listing, gmpUpdated));
                 }
+            } else {
+                System.err.println("No response body received.");
             }
         } catch (HttpClientErrorException e) {
             System.err.println("Error fetching GMP data: " + e.getStatusCode() + " - " + e.getResponseBodyAsString());
+        } catch (Exception e) {
+            System.err.println("An unexpected error occurred: " + e.getMessage());
         }
         return ipoList;
     }

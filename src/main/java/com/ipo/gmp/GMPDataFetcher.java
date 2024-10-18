@@ -5,7 +5,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import javax.net.ssl.SSLContext;
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +22,9 @@ public class GMPDataFetcher {
         List<IPO> ipoList = new ArrayList<>();
         try {
             // Example for ignoring SSL certificate validation (not recommended for production)
+            // Create an SSLContext with the desired protocol
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, null, new java.security.SecureRandom());
             System.setProperty("javax.net.ssl.trustStoreType", "Windows-ROOT");
             // Connect to the Chittorgarh GMP page
             Document document = Jsoup.connect(GMP_URL)
@@ -43,6 +49,10 @@ public class GMPDataFetcher {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        } catch (KeyManagementException e) {
+            throw new RuntimeException(e);
         }
         //getValues();
         return ipoList;

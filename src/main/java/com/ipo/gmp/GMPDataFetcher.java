@@ -6,30 +6,41 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
-import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.security.KeyManagementException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GMPDataFetcher {
-    //private static final String GMP_URL = "https://www.investorgain.com/gmp/hyundai-motor-ipo-gmp/1024/";
-
     private static final String GMP_URL = "https://www.investorgain.com/report/live-ipo-gmp/331/";
-    //private static final String GMP_URL = "https://ipocentral.in/";
-    //private static final String GMP_URL = "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/";
+
     public List<IPO> fetchGMPData() {
         List<IPO> ipoList = new ArrayList<>();
         try {
-            // Example for ignoring SSL certificate validation (not recommended for production)
-            // Create an SSLContext with the desired protocol
+            // Create a custom TrustManager that does not validate certificate chains
+            TrustManager[] trustAllCerts = new TrustManager[]{
+                    new X509TrustManager() {
+                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                            return null;
+                        }
+                        public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) {}
+                        public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) {}
+                    }
+            };
+
+            // Initialize the SSL context with the custom TrustManager
             SSLContext sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, null, new java.security.SecureRandom());
-            System.setProperty("javax.net.ssl.trustStoreType", "Windows-ROOT");
-            // Connect to the Chittorgarh GMP page
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+            SSLContext.setDefault(sslContext);
+
+            // Connect to the GMP page
             Document document = Jsoup.connect(GMP_URL)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
                     .get();
+
             // Select the table containing the GMP data
             Elements rows = document.select("#mainTable tbody tr");
 
@@ -54,7 +65,6 @@ public class GMPDataFetcher {
         } catch (KeyManagementException e) {
             throw new RuntimeException(e);
         }
-        //getValues();
         return ipoList;
     }
 }

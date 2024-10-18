@@ -31,7 +31,6 @@ public class GMPDataFetcher {
                     }
             };
 
-            System.out.println("Document : == ======= " + "BEFORE");
             // Initialize the SSL context with the custom TrustManager
             SSLContext sslContext = SSLContext.getInstance("TLS");
             sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
@@ -39,9 +38,9 @@ public class GMPDataFetcher {
 
             // Connect to the GMP page
             Document document = Jsoup.connect(GMP_URL)
-                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.96 Safari/537.36")
+                    .referrer("https://www.investorgain.com/")
                     .get();
-            System.out.println("Document : == ======= " + document);
 
             // Select the table containing the GMP data
             Elements rows = document.select("#mainTable tbody tr");

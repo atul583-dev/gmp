@@ -8,14 +8,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.KeyManagementException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,32 +32,38 @@ public class GMPDataFetcher {
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         // Make the HTTP request
-        ResponseEntity<String> response = restTemplate.exchange(GMP_URL, HttpMethod.GET, entity, String.class);
-        String responseBody = response.getBody();
+        ResponseEntity<String> response;
+        try {
+            response = restTemplate.exchange(GMP_URL, HttpMethod.GET, entity, String.class);
+            String responseBody = response.getBody();
+            System.out.println("RESPONSEBODY : " + responseBody);
 
-        System.out.println("RESPONSE BODY == " + responseBody);
+            if (responseBody != null) {
+                // Parse the HTML response using Jsoup
+                Document document = Jsoup.parse(responseBody);
+                // Select the table containing the GMP data
+                Elements rows = document.select("#mainTable tbody tr");
 
-        if (responseBody != null) {
-            // Parse the HTML response using Jsoup
-            Document document = Jsoup.parse(responseBody);
-            // Select the table containing the GMP data
-            Elements rows = document.select("#mainTable tbody tr");
+                for (Element row : rows) {
+                    // Extract data and add to list
+                    String ipo = row.select("td[data-label='IPO'] a").text();
+                    String price = row.select("td[data-label='Price']").text();
+                    String gmp = row.select("td[data-label='GMP(₹)'] b").text();
+                    String estListing = row.select("td[data-label='Est Listing'] b").text();
+                    String ipoSize = row.select("td[data-label='IPO Size']").text();
+                    String lot = row.select("td[data-label='Lot']").text();
+                    String open = row.select("td[data-label='Open']").text();
+                    String close = row.select("td[data-label='Close']").text();
+                    String listing = row.select("td[data-label='Listing']").text();
+                    String gmpUpdated = row.select("td[data-label='GMP Updated']").text();
 
-            for (Element row : rows) {
-                String ipo = row.select("td[data-label='IPO'] a").text();
-                String price = row.select("td[data-label='Price']").text();
-                String gmp = row.select("td[data-label='GMP(₹)'] b").text();
-                String estListing = row.select("td[data-label='Est Listing'] b").text();
-                String ipoSize = row.select("td[data-label='IPO Size']").text();
-                String lot = row.select("td[data-label='Lot']").text();
-                String open = row.select("td[data-label='Open']").text();
-                String close = row.select("td[data-label='Close']").text();
-                String listing = row.select("td[data-label='Listing']").text();
-                String gmpUpdated = row.select("td[data-label='GMP Updated']").text();
-
-                ipoList.add(new IPO(ipo, price, gmp, estListing, ipoSize, lot, open, close, listing, gmpUpdated));
+                    ipoList.add(new IPO(ipo, price, gmp, estListing, ipoSize, lot, open, close, listing, gmpUpdated));
+                }
             }
+        } catch (HttpClientErrorException e) {
+            System.err.println("Error fetching GMP data: " + e.getStatusCode() + " - " + e.getResponseBodyAsString());
         }
         return ipoList;
     }
+
 }

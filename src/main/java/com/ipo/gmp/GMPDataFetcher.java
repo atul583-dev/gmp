@@ -19,8 +19,9 @@ public class GMPDataFetcher {
         List<IPO> ipoList = new ArrayList<>();
         try {
             // Connect to the Chittorgarh GMP page
-            Document document = Jsoup.connect(GMP_URL).get();
-
+            Document document = Jsoup.connect(GMP_URL)
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
+                    .get();
             // Select the table containing the GMP data
             Elements rows = document.select("#mainTable tbody tr");
 

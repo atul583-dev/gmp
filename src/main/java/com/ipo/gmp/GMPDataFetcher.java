@@ -4,6 +4,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -19,29 +24,27 @@ public class GMPDataFetcher {
 
     public List<IPO> fetchGMPData() {
         List<IPO> ipoList = new ArrayList<>();
-        try {
-            // Create a custom TrustManager that does not validate certificate chains
-            TrustManager[] trustAllCerts = new TrustManager[]{
-                    new X509TrustManager() {
-                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                            return null;
-                        }
-                        public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) {}
-                        public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) {}
-                    }
-            };
 
-            // Initialize the SSL context with the custom TrustManager
-            SSLContext sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
-            SSLContext.setDefault(sslContext);
+        // Create a RestTemplate instance
+        RestTemplate restTemplate = new RestTemplate();
 
-            // Connect to the GMP page
-            Document document = Jsoup.connect(GMP_URL)
-                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.96 Safari/537.36")
-                    .referrer("https://www.investorgain.com/")
-                    .get();
+        // Set headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.96 Safari/537.36");
+        headers.set("Referer", "https://www.investorgain.com/");
 
+        // Create an HttpEntity with the headers
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        // Make the HTTP request
+        ResponseEntity<String> response = restTemplate.exchange(GMP_URL, HttpMethod.GET, entity, String.class);
+        String responseBody = response.getBody();
+
+        System.out.println("RESPONSE BODY == " + responseBody);
+
+        if (responseBody != null) {
+            // Parse the HTML response using Jsoup
+            Document document = Jsoup.parse(responseBody);
             // Select the table containing the GMP data
             Elements rows = document.select("#mainTable tbody tr");
 
@@ -59,12 +62,6 @@ public class GMPDataFetcher {
 
                 ipoList.add(new IPO(ipo, price, gmp, estListing, ipoSize, lot, open, close, listing, gmpUpdated));
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        } catch (KeyManagementException e) {
-            throw new RuntimeException(e);
         }
         return ipoList;
     }

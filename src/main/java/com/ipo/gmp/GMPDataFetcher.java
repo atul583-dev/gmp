@@ -31,6 +31,7 @@ public class GMPDataFetcher {
                     }
             };
 
+            System.out.println("Document : == ======= " + "BEFORE");
             // Initialize the SSL context with the custom TrustManager
             SSLContext sslContext = SSLContext.getInstance("TLS");
             sslContext.init(null, trustAllCerts, new java.security.SecureRandom());

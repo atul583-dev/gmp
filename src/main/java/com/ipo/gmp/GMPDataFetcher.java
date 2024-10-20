@@ -35,6 +35,9 @@ public class GMPDataFetcher {
         List<IPO> ipoList = new ArrayList<>();
 
 
+        System.out.println("-------This----------");
+        logger.debug("RESPONSEBODY ------------------: ");
+
         // Set headers
         HttpHeaders headers = new HttpHeaders();
         headers.set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.96 Safari/537.36");

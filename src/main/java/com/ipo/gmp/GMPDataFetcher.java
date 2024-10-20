@@ -49,10 +49,10 @@ public class GMPDataFetcher {
         // Make the HTTP request
         ResponseEntity<String> response;
         try {
-            response = restTemplate.exchange(TEST, HttpMethod.GET, entity, String.class);
+            response = restTemplate.exchange(GMP_URL, HttpMethod.GET, entity, String.class);
             String responseBody = response.getBody();
-            System.out.println("RES : " + responseBody);
-            logger.debug("RESPONSEBODY : " + responseBody);
+            System.out.println("------RES : " + responseBody);
+            logger.debug("----RESPONSEBODY : " + responseBody);
 
             /*if (responseBody != null) {
                 // Parse the HTML response using Jsoup

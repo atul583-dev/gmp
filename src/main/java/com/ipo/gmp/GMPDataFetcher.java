@@ -4,6 +4,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -16,6 +18,8 @@ import java.util.List;
 
 public class GMPDataFetcher {
     private static final String GMP_URL = "https://www.investorgain.com/report/live-ipo-gmp/331/";
+    // Create a logger instance
+    private static final Logger logger = LoggerFactory.getLogger(GMPDataFetcher.class);
 
     public List<IPO> fetchGMPData() {
         List<IPO> ipoList = new ArrayList<>();
@@ -36,7 +40,7 @@ public class GMPDataFetcher {
         try {
             response = restTemplate.exchange(GMP_URL, HttpMethod.GET, entity, String.class);
             String responseBody = response.getBody();
-            System.out.println("RESPONSEBODY : " + responseBody);
+            logger.debug("RESPONSEBODY : " + responseBody);
 
             if (responseBody != null) {
                 // Parse the HTML response using Jsoup

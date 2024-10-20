@@ -21,7 +21,6 @@ import java.util.List;
 @Service
 public class GMPDataFetcher {
     private static final String GMP_URL = "https://www.investorgain.com/report/live-ipo-gmp/331/";
-    private static final String TEST = "http://worldclockapi.com/api/json/utc/now";
     // Create a logger instance
     private static final Logger logger = LoggerFactory.getLogger(GMPDataFetcher.class);
 
@@ -36,7 +35,7 @@ public class GMPDataFetcher {
 
 
         System.out.println("-------This----------");
-        logger.debug("RESPONSEBODY ------------------: ");
+        logger.debug("logger ------------------: ");
 
         // Set headers
         HttpHeaders headers = new HttpHeaders();
@@ -51,7 +50,7 @@ public class GMPDataFetcher {
         try {
             response = restTemplate.exchange(GMP_URL, HttpMethod.GET, entity, String.class);
             String responseBody = response.getBody();
-            System.out.println("------RES : " + responseBody);
+            System.out.println("------responseBody SOP : " + responseBody);
             logger.debug("----RESPONSEBODY : " + responseBody);
 
             /*if (responseBody != null) {

@@ -63,6 +63,12 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.13</version> <!-- You can use the latest stable version -->
+		</dependency>
+
 	</dependencies>
 
 	<build>

@@ -6,26 +6,33 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class GMPDataFetcher {
     private static final String GMP_URL = "https://www.investorgain.com/report/live-ipo-gmp/331/";
     // Create a logger instance
     private static final Logger logger = LoggerFactory.getLogger(GMPDataFetcher.class);
 
+    private final RestTemplate restTemplate;
+
+    @Autowired
+    public GMPDataFetcher(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
     public List<IPO> fetchGMPData() {
         List<IPO> ipoList = new ArrayList<>();
 
-        // Create a RestTemplate instance
-        RestTemplate restTemplate = new RestTemplate();
 
         // Set headers
         HttpHeaders headers = new HttpHeaders();

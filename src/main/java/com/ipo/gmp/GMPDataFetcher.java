@@ -21,6 +21,7 @@ import java.util.List;
 @Service
 public class GMPDataFetcher {
     private static final String GMP_URL = "https://www.investorgain.com/report/live-ipo-gmp/331/";
+    private static final String TEST = "http://worldclockapi.com/api/json/utc/now";
     // Create a logger instance
     private static final Logger logger = LoggerFactory.getLogger(GMPDataFetcher.class);
 
@@ -45,11 +46,12 @@ public class GMPDataFetcher {
         // Make the HTTP request
         ResponseEntity<String> response;
         try {
-            response = restTemplate.exchange(GMP_URL, HttpMethod.GET, entity, String.class);
+            response = restTemplate.exchange(TEST, HttpMethod.GET, entity, String.class);
             String responseBody = response.getBody();
+            System.out.println("RES : " + responseBody);
             logger.debug("RESPONSEBODY : " + responseBody);
 
-            if (responseBody != null) {
+            /*if (responseBody != null) {
                 // Parse the HTML response using Jsoup
                 Document document = Jsoup.parse(responseBody);
                 // Select the table containing the GMP data
@@ -72,7 +74,7 @@ public class GMPDataFetcher {
                 }
             } else {
                 System.err.println("No response body received.");
-            }
+            }*/
         } catch (HttpClientErrorException e) {
             System.err.println("Error fetching GMP data: " + e.getStatusCode() + " - " + e.getResponseBodyAsString());
         } catch (Exception e) {

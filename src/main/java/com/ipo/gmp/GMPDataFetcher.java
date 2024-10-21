@@ -45,6 +45,24 @@ public class GMPDataFetcher {
         // Create an HttpEntity with the headers
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
+        try {
+            // Set the URL to scrape
+
+            System.out.println("-------Before----------");
+            // Connect to the URL and add headers
+            Document document = Jsoup.connect(GMP_URL)
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+                    .referrer("https://www.google.com/")
+                    .timeout(5000)  // Set timeout to prevent hanging
+                    .get();
+
+            System.out.println("-------After----------");
+            // Process the scraped data
+            System.out.println(document.title());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         // Make the HTTP request
         ResponseEntity<String> response;
         try {

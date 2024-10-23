@@ -20,7 +20,9 @@ import java.util.List;
 
 @Service
 public class GMPDataFetcher {
-    private static final String GMP_URL = "https://www.investorgain.com/report/live-ipo-gmp/331/";
+    //private static final String GMP_URL = "https://www.investorgain.com/report/live-ipo-gmp/331/";
+    private static final String GMP_URL = "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/";
+
     // Create a logger instance
     private static final Logger logger = LoggerFactory.getLogger(GMPDataFetcher.class);
 
@@ -40,7 +42,7 @@ public class GMPDataFetcher {
         // Set headers
         HttpHeaders headers = new HttpHeaders();
         headers.set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.96 Safari/537.36");
-        headers.set("Referer", "https://www.investorgain.com/");
+        headers.set("Referer", "https://ipowatch.in");
 
         // Create an HttpEntity with the headers
         HttpEntity<String> entity = new HttpEntity<>(headers);
@@ -71,30 +73,28 @@ public class GMPDataFetcher {
             System.out.println("------responseBody SOP : " + responseBody);
             logger.debug("----RESPONSEBODY : " + responseBody);
 
-            /*if (responseBody != null) {
+            if (responseBody != null) {
                 // Parse the HTML response using Jsoup
                 Document document = Jsoup.parse(responseBody);
                 // Select the table containing the GMP data
-                Elements rows = document.select("#mainTable tbody tr");
+                Elements rows = document.select("figure.wp-block-table table tbody tr");
 
+                // Iterate through each row and extract data
                 for (Element row : rows) {
-                    // Extract data and add to list
-                    String ipo = row.select("td[data-label='IPO'] a").text();
-                    String price = row.select("td[data-label='Price']").text();
-                    String gmp = row.select("td[data-label='GMP(₹)'] b").text();
-                    String estListing = row.select("td[data-label='Est Listing'] b").text();
-                    String ipoSize = row.select("td[data-label='IPO Size']").text();
-                    String lot = row.select("td[data-label='Lot']").text();
-                    String open = row.select("td[data-label='Open']").text();
-                    String close = row.select("td[data-label='Close']").text();
-                    String listing = row.select("td[data-label='Listing']").text();
-                    String gmpUpdated = row.select("td[data-label='GMP Updated']").text();
+                    String currentIPO = row.select("td").get(0).text();
+                    String ipoGMP = row.select("td").get(1).text();
+                    String gmpTrend = row.select("td").get(2).select("img").attr("src"); // Gets the image source for trend
+                    String priceBand = row.select("td").get(3).text();
+                    String listingGain = row.select("td").get(4).text();
+                    String expectedListing = row.select("td").get(5).text();
+                    String ipoDate = row.select("td").get(6).text();
 
-                    ipoList.add(new IPO(ipo, price, gmp, estListing, ipoSize, lot, open, close, listing, gmpUpdated));
+                    ipoList.add(new IPO(currentIPO, ipoGMP, ipoGMP, ipoGMP, ipoGMP, ipoGMP, ipoGMP, ipoGMP, ipoGMP, ipoGMP));
+                    //ipoList.add(new IPO(ipo, price, gmp, estListing, ipoSize, lot, open, close, listing, gmpUpdated));
                 }
             } else {
                 System.err.println("No response body received.");
-            }*/
+            }
         } catch (HttpClientErrorException e) {
             System.err.println("Error fetching GMP data: " + e.getStatusCode() + " - " + e.getResponseBodyAsString());
         } catch (Exception e) {

@@ -1,127 +1,93 @@
 package com.ipo.gmp;
 
 public class IPO {
-    private String ipo;
-    private String price;
-    private String gmp;
-    private String estListing;
-    private String ipoSize;
-    private String lot;
-    private String open;
-    private String close;
-    private String listing;
-    private String gmpUpdated;
+    private String currentIPO;
+    private String ipoGMP;
+    private String gmpTrend;
+    private String priceBand;
+    private String listingGain;
+    private String expectedListing;
+    private String ipoDate;
 
-    // Parameterized constructor
-    public IPO(String ipo, String price, String gmp, String estListing, String ipoSize,
-               String lot, String open, String close, String listing, String gmpUpdated) {
-        this.ipo = ipo;
-        this.price = price;
-        this.gmp = gmp;
-        this.estListing = estListing;
-        this.ipoSize = ipoSize;
-        this.lot = lot;
-        this.open = open;
-        this.close = close;
-        this.listing = listing;
-        this.gmpUpdated = gmpUpdated;
+    // Constructor
+    public IPO(String currentIPO, String ipoGMP, String gmpTrend, String priceBand,
+               String listingGain, String expectedListing, String ipoDate) {
+        this.currentIPO = currentIPO;
+        this.ipoGMP = ipoGMP;
+        this.gmpTrend = gmpTrend;
+        this.priceBand = priceBand;
+        this.listingGain = listingGain;
+        this.expectedListing = expectedListing;
+        this.ipoDate = ipoDate;
     }
 
     // Getters and Setters
-    public String getIpo() {
-        return ipo;
+    public String getCurrentIPO() {
+        return currentIPO;
     }
 
-    public void setIpo(String ipo) {
-        this.ipo = ipo;
+    public void setCurrentIPO(String currentIPO) {
+        this.currentIPO = currentIPO;
     }
 
-    public String getPrice() {
-        return price;
+    public String getIpoGMP() {
+        return ipoGMP;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setIpoGMP(String ipoGMP) {
+        this.ipoGMP = ipoGMP;
     }
 
-    public String getGmp() {
-        return gmp;
+    public String getGmpTrend() {
+        return gmpTrend;
     }
 
-    public void setGmp(String gmp) {
-        this.gmp = gmp;
+    public void setGmpTrend(String gmpTrend) {
+        this.gmpTrend = gmpTrend;
     }
 
-    public String getEstListing() {
-        return estListing;
+    public String getPriceBand() {
+        return priceBand;
     }
 
-    public void setEstListing(String estListing) {
-        this.estListing = estListing;
+    public void setPriceBand(String priceBand) {
+        this.priceBand = priceBand;
     }
 
-    public String getIpoSize() {
-        return ipoSize;
+    public String getListingGain() {
+        return listingGain;
     }
 
-    public void setIpoSize(String ipoSize) {
-        this.ipoSize = ipoSize;
+    public void setListingGain(String listingGain) {
+        this.listingGain = listingGain;
     }
 
-    public String getLot() {
-        return lot;
+    public String getExpectedListing() {
+        return expectedListing;
     }
 
-    public void setLot(String lot) {
-        this.lot = lot;
+    public void setExpectedListing(String expectedListing) {
+        this.expectedListing = expectedListing;
     }
 
-    public String getOpen() {
-        return open;
+    public String getIpoDate() {
+        return ipoDate;
     }
 
-    public void setOpen(String open) {
-        this.open = open;
-    }
-
-    public String getClose() {
-        return close;
-    }
-
-    public void setClose(String close) {
-        this.close = close;
-    }
-
-    public String getListing() {
-        return listing;
-    }
-
-    public void setListing(String listing) {
-        this.listing = listing;
-    }
-
-    public String getGmpUpdated() {
-        return gmpUpdated;
-    }
-
-    public void setGmpUpdated(String gmpUpdated) {
-        this.gmpUpdated = gmpUpdated;
+    public void setIpoDate(String ipoDate) {
+        this.ipoDate = ipoDate;
     }
 
     @Override
     public String toString() {
         return "IPO{" +
-                "ipo='" + ipo + '\'' +
-                ", price='" + price + '\'' +
-                ", gmp='" + gmp + '\'' +
-                ", estListing='" + estListing + '\'' +
-                ", ipoSize='" + ipoSize + '\'' +
-                ", lot='" + lot + '\'' +
-                ", open='" + open + '\'' +
-                ", close='" + close + '\'' +
-                ", listing='" + listing + '\'' +
-                ", gmpUpdated='" + gmpUpdated + '\'' +
+                "currentIPO='" + currentIPO + '\'' +
+                ", ipoGMP='" + ipoGMP + '\'' +
+                ", gmpTrend='" + gmpTrend + '\'' +
+                ", priceBand='" + priceBand + '\'' +
+                ", listingGain='" + listingGain + '\'' +
+                ", expectedListing='" + expectedListing + '\'' +
+                ", ipoDate='" + ipoDate + '\'' +
                 '}';
     }
 }
-

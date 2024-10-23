@@ -11,16 +11,12 @@ async function fetchGMPData() {
             data.forEach(ipo => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                        <td data-label="IPO Name">${ipo.ipo}</td>
-                        <td data-label="Price (₹)">${ipo.price}</td>
-                        <td data-label="GMP (₹)" class="gmp-column">${ipo.gmp}</td>
-                        <td data-label="Est. Listing">${ipo.estListing}</td>
-                        <td data-label="IPO Size (Cr)">${ipo.ipoSize}</td>
-                        <td data-label="Lot Size">${ipo.lot}</td>
-                        <td data-label="Open Date">${ipo.open}</td>
-                        <td data-label="Close Date">${ipo.close}</td>
-                        <td data-label="Listing Date">${ipo.listing}</td>
-                        <td data-label="GMP Updated Date">${ipo.gmpUpdated}</td>
+                        <td data-label="IPO Name">${ipo.currentIPO}</td>
+                        <td data-label="IPO GMP" class="gmp-column">${ipo.ipoGMP}</td>
+                        <td data-label="Price Band">${ipo.priceBand}</td>
+                        <td data-label="Listing Gain">${ipo.listingGain}</td>
+                        <td data-label="Expected Listing">${ipo.expectedListing}</td>
+                        <td data-label="IPO Date">${ipo.ipoDate}</td>
                     `;
                 tableBody.appendChild(row);
             });

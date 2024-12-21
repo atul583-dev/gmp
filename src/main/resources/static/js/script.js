@@ -15,8 +15,6 @@ async function fetchGMPData() {
                         <td data-label="IPO GMP" class="gmp-column">${ipo.ipoGMP}</td>
                         <td data-label="Price Band">${ipo.priceBand}</td>
                         <td data-label="Listing Gain">${ipo.listingGain}</td>
-                        <td data-label="Expected Listing">${ipo.expectedListing}</td>
-                        <td data-label="IPO Date">${ipo.ipoDate}</td>
                     `;
                 tableBody.appendChild(row);
             });

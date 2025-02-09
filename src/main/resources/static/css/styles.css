@@ -1,4 +1,4 @@
-/* General styles */
+/* Reset & Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -6,75 +6,140 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f9;
+  font-family: 'Lato', sans-serif;
+  background-color: #f7f9fc;
   color: #333;
+  line-height: 1.6;
 }
 
-/* Container styling */
+/* Header Styling */
+header {
+  background: linear-gradient(135deg, #4CAF50, #81C784);
+  color: #fff;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.header-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.header-container p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Main Container Styling */
 .container {
   width: 90%;
   max-width: 1200px;
   margin: 2rem auto;
-  padding: 2rem;
+  padding: 1.5rem;
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-.container p {
-  text-align: center;
-}
-
-/* Title styling */
-.page-title {
-  text-align: center;
-  font-size: 2rem;
-  color: #4CAF50;
-  margin-bottom: 1.5rem;
-}
-
-/* Table styling */
+/* Table Styling */
 #ipo-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1.5rem;
+  margin: 1rem 0;
 }
 
 #ipo-table th,
 #ipo-table td {
-  padding: 12px;
+  padding: 15px;
   text-align: left;
   font-size: 1rem;
-  color: #555;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 #ipo-table th {
   background-color: #4CAF50;
-  color: white;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-#ipo-table tr:hover {
+#ipo-table tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
+#ipo-table tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s ease;
+}
+
+/* Button styling inside table (if needed) */
 #ipo-table td button {
   padding: 8px 16px;
   background-color: #007BFF;
-  color: white;
+  color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 #ipo-table td button:hover {
   background-color: #0056b3;
 }
 
-footer {
+/* No Data Message Styling */
+.no-data {
   text-align: center;
-  font-size: 13px;
-  color: black;
-  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  padding: 1rem;
+  color: #777;
+}
+
+/* Footer Styling */
+footer {
+  background-color: #f1f1f1;
+  padding: 1rem 0;
+  text-align: center;
+  margin-top: 2rem;
+  border-top: 1px solid #ddd;
+}
+
+.footer-content p {
+  margin: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.footer-content a {
+  color: #4CAF50;
+  margin: 0 0.5rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-content a:hover {
+  color: #2e7d32;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-container h1 {
+    font-size: 2rem;
+  }
+
+  #ipo-table th,
+  #ipo-table td {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header-container p {
+    font-size: 1rem;
+  }
 }

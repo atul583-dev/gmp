@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IPO GMP Tracker | Track Upcoming IPOs and Grey Market Premium in India</title>
-    <meta name="description" content="Track the latest Grey Market Premium (GMP) of upcoming IPOs in India. Stay updated with IPO details, listing gains, and dates.">
-    <meta name="keywords" content="IPO, IPO GMP, Grey Market Premium, Upcoming IPOs, IPO Tracker India, IPO Listing Gains, IPO Dates, IPO Analysis">
-    <meta name="author" content="Atul Bhoyar">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://ipotrackers.com/">
+    <meta name="description" content="Track the latest Grey Market Premium (GMP) of upcoming IPOs in India. Stay updated with IPO details, listing gains, and dates." />
+    <meta name="keywords" content="IPO, IPO GMP, Grey Market Premium, Upcoming IPOs, IPO Tracker India, IPO Listing Gains, IPO Dates, IPO Analysis" />
+    <meta name="author" content="Atul Bhoyar" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://ipotrackers.com/" />
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="icon" type="image/x-icon" href="/favicon.png">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700&display=swap" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="icon" type="image/x-icon" href="/favicon.png" />
 
     <!-- Open Graph Tags for Social Media -->
-    <meta property="og:title" content="IPO GMP Tracker | Grey Market Premium Updates">
-    <meta property="og:description" content="Track the Grey Market Premium (GMP) and details of upcoming IPOs in India.">
-    <meta property="og:image" content="https://ipotrackers.com/og-image.png">
-    <meta property="og:url" content="https://ipotrackers.com/">
-    <meta property="og:type" content="website">
+    <meta property="og:title" content="IPO GMP Tracker | Grey Market Premium Updates" />
+    <meta property="og:description" content="Track the Grey Market Premium (GMP) and details of upcoming IPOs in India." />
+    <meta property="og:image" content="https://ipotrackers.com/og-image.png" />
+    <meta property="og:url" content="https://ipotrackers.com/" />
+    <meta property="og:type" content="website" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="IPO GMP Tracker">
-    <meta name="twitter:description" content="Stay updated with the latest Grey Market Premium (GMP) and details of upcoming IPOs in India.">
-    <meta name="twitter:image" content="https://ipotrackers.com/twitter-image.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="IPO GMP Tracker" />
+    <meta name="twitter:description" content="Stay updated with the latest Grey Market Premium (GMP) and details of upcoming IPOs in India." />
+    <meta name="twitter:image" content="https://ipotrackers.com/twitter-image.png" />
 
     <!-- Schema Markup -->
     <script type="application/ld+json">
@@ -44,43 +47,46 @@
     </script>
 </head>
 <body>
+<header>
+    <div class="header-container">
+        <h1>IPO GMP Tracker</h1>
+        <p>Track Upcoming IPOs and Grey Market Premium (GMP) in India</p>
+    </div>
+</header>
 
+<main>
+    <div class="container">
+        <table id="ipo-table">
+            <thead>
+            <tr>
+                <th>IPO Name</th>
+                <th>IPO GMP (₹)</th>
+                <th>Listing Gain</th>
+                <th>IPO Dates</th>
+            </tr>
+            </thead>
+            <tbody id="ipo-container">
+            <!-- IPO data will be dynamically inserted here -->
+            </tbody>
+        </table>
+        <div class="no-data" id="no-data-message">Loading GMP data...</div>
+    </div>
+</main>
 
-<div class="container">
-    <h1 class="page-title">IPO GMP Tracker</h1>
-    <p>Upcoming IPOs and Grey Market Premium (GMP)</p>
-
-    <table id="ipo-table">
-        <thead>
-        <tr>
-            <th>IPO Name</th>
-            <th>IPO GMP (₹)</th>
-            <th>Listing Gain</th>
-            <th>IPO Dates</th>
-        </tr>
-        </thead>
-        <tbody id="ipo-container">
-        <!-- IPO data will be dynamically inserted here -->
-        </tbody>
-    </table>
-    <div class="no-data" id="no-data-message">Loading GMP data...</div>
-</div>
-
-<!-- Footer -->
 <footer>
-    <p>©2025 IPO GMP Tracker | Powered by Atul Bhoyar Inc</p>
-    <p>
-        Follow Us:
-        <a href="https://www.instagram.com/ipotrackers/" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-instagram"></i>
-        </a>
-        |
-        <a href="https://x.com/ipotrackers" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-twitter"></i>
-        </a>
-    </p>
+    <div class="footer-content">
+        <p>©2025 IPO GMP Tracker | Powered by Atul Bhoyar Inc</p>
+        <p>
+            Follow Us:
+            <a href="https://www.instagram.com/ipotrackers/" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://x.com/ipotrackers" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </p>
+    </div>
 </footer>
-
 
 <script src="/js/script.js"></script>
 </body>
